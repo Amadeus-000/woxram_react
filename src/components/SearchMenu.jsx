@@ -1,41 +1,54 @@
 import styled from "@emotion/styled";
 import Button from '@mui/material/Button';
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from 'axios';
 import {useLocation, useNavigate } from 'react-router-dom';
 
 
-import { Grid, Container, Checkbox} from '@mui/material';
+import { Grid, Checkbox} from '@mui/material';
 import {FormControl, Select, MenuItem, InputLabel} from '@mui/material';
 import { Tooltip, IconButton } from "@mui/material";
-import { AiOutlineSearch, AiOutlinePlus, AiFillQuestionCircle} from 'react-icons/ai';
+import { AiOutlineSearch, AiFillQuestionCircle} from 'react-icons/ai';
+
+import SearchAutocomplete from "./SearchAutocomplete";
 
 import './SearchMenu.css';
 
-const RoundedInput = styled("input")({
-    borderRadius: "50px",
-    padding: "10px",
-    paddingLeft: "20px",
-    marginBottom: "30px",
-    width: "75%",
-    fontSize: "18px",
-});
+import useCustomEffect from './hooks/useCustomEffect';
+
 const SearchButton = styled(Button)({
     width:"50%",
     borderRadius:"50px",
-    margin:"20px"
+    margin:"20px",
 });
 
 const SearchMenu = (props) => {
-
+    // APIの呼び出し
+    const getWoxramAPI = () => {
+        console.log("getWoxramAPI");
+        props.setLoading(true);
+        // axios.get('http://133.130.96.237/dnbapi/woxsimulation/')
+        axios.get('https://woxram.com/api/test/',
+            {params: {keyword:query.get("keyword"), order:query.get("order"), sample:query.get("sample"), dlsite:query.get("dlsite"),page:query.get("page")}})
+        .then(function (response) {
+                const result = JSON.stringify(response.data);
+                props.setLoading(false);
+                props.showResult(result)
+            })
+        };
     // クエリパラメータを取得
     let firststateSample=true;
     let firststateDlsite=true;
+    let firstKeyword="";
+    let firstorder=2;
+    // let page=query.get("page")?Number(query.get("page")):1;
     const search=useLocation().search;
     const query=new URLSearchParams(search);
-    if(query.get("keywords")!==null){
-        console.log("keywords: "+query.get("keywords"));
+
+    if(query.get("keyword")!==null){
+        // クエリパラメータがある場合はそれを初期値とする
+        firstKeyword=query.get("keyword");
         if(query.get("sample")=='on'){
             firststateSample=true;
         }else{
@@ -46,17 +59,31 @@ const SearchMenu = (props) => {
         }else{
             firststateDlsite=false;
         }
+        if(query.get("order")!==null){
+            firstorder=Number(query.get("order"));
+        };
     }
-    let order=0;
-    if(query.get("order")!==null){
-        order=Number(query.get("order"));
-        console.log("order: "+order);
+
+    // 初回レンダリング時にクエリパラメータにkeywordがある場合は検索APIを呼び出す
+    const initProcess = () => {
+        if(query.get("keyword")!==null){
+            getWoxramAPI();
+        }
     };
+    useEffect(initProcess, []);
+
 
     // チェックボックス、セレクトボックスのデフォルト値を設定
     const [isSample, setIsSample] = useState(firststateSample);
     const [isDlsite, setIsDlsite] = useState(firststateDlsite);
-    let isXjoin=true;
+    const [isXjoin, setIsXjoin] = useState(true);
+    const [searchKeyword, setSearchKeyword] = useState(firstKeyword);
+
+    const [selectedOrderValue, setSelectedOrderValue] = useState(firstorder);
+    const handleChange = (e) => {
+        console.log(e.target.value)
+        setSelectedOrderValue(e.target.value);
+    };
 
     // クエリパラメータをURLにセットする関数
     const navigate = useNavigate();
@@ -67,50 +94,42 @@ const SearchMenu = (props) => {
     };
     const setQueryParams = () => {
         deleteQueryParam();
+        setQueryParam("keyword",searchKeyword);
         if(isSample){setQueryParam("sample","on")}
         if(isDlsite){setQueryParam("dlsite","on")}
-        if(order==0){order=1}
-        setQueryParam("order",order);
+        setQueryParam("order",selectedOrderValue);
     };
     const deleteQueryParam = () => {
         navigate({ search: '' });
     };
 
-
-    // Enterキーの押下を検知
-    const [composing, setComposition] = useState(false);
-    // const startComposition = () => setComposition(true);
-    // const endComposition = () => setComposition(false);
-    const onKeydown = (key) => {
-        switch (key) {
-            case "Enter":
-                if(composing) break;
-                console.log('Enter key pressed');
-                setQueryParams();
-                getWoxramAPI();
-                break;
+    // Enterキーを押したときisSearchがtrueになり検索apiを呼び出す
+    const [isSearch, setIsSearch] = useState(false);
+    const setTrueIssearch = () => {
+        setIsSearch(true);
+    };
+    const searchSequence = () => {
+        console.log("searchSequence");
+        setIsSearch(false);
+        // 検索キーワードが空の場合は何もしない
+        if(searchKeyword===""){
+            return;
         }
+        setQueryParams();
+        getWoxramAPI();
     };
-
-    // APIの呼び出し
-    const getWoxramAPI = () => {
-      axios.get('http://133.130.96.237/dnbapi/woxsimulation/')
-        .then(function (response) {
-            const result = JSON.stringify(response.data);
-            props.showResult(result)
-        })
-    };
+    useCustomEffect(searchSequence, [isSearch]);
 
     // 詳細検索の開閉
-    const [detailOpened, setDetailOpened] = useState(true);
+    const [detailOpened, setDetailOpened] = useState( (query.get("page")?false:true));
     const toggleDetailOpened = () => setDetailOpened(!detailOpened);
 
     // 並び順
     const orderMenuItems=[
-        {id:1, name:"追加日(昇順)", value:1},
-        {id:2, name:"追加日(降順)", value:2},
-        {id:3, name:"発売日(昇順)", value:3},
-        {id:4, name:"発売日(降順)", value:4},
+        {id:1, name:"発売日(昇順)", value:1},
+        {id:2, name:"発売日(降順)", value:2},
+        {id:3, name:"追加日(昇順)", value:3},
+        {id:4, name:"追加日(降順)", value:4},
     ];
 
     // チェックボックス
@@ -128,28 +147,22 @@ const SearchMenu = (props) => {
             <MenuItem key={item.id} value={item.value}>{item.name}</MenuItem>
         );
     });
-    const [selectedValue, setSelectedValue] = useState(order);
-    const handleChange = (e) => {
-        console.log(e.target.value)
-        setSelectedValue(e.target.value);
-    };
 
     return (
         <>
             <Grid container justifyContent="center">
-                <RoundedInput type="text" onKeyDown={(e)=>{onKeydown(e.key)}}/>
-                <AiOutlinePlus style={{margin:"7px 10px"}} onClick={toggleDetailOpened} size={30}/>
+                <SearchAutocomplete toggleDetailOpened={toggleDetailOpened} setTrueIssearch={setTrueIssearch} firstKeyword={firstKeyword} setSearchKeyword={setSearchKeyword}/>
             </Grid>
             <Grid container spacing={2} justifyContent="center">
-                {/* <Button variant="contained" color="primary" size="large" sx={{width:"50%",borderRadius:"50px",margin:"20px"}}><AiOutlineSearch /></Button> */}
-                <SearchButton variant="contained" color="primary" size="large" onClick={()=>{onKeydown("Enter")}}><AiOutlineSearch size={20}/></SearchButton>
+                {/* <SearchButton variant="contained" color="primary" size="large" onClick={()=>{onKeydown("Enter")}}><AiOutlineSearch size={20}/></SearchButton> */}
+                <SearchButton variant="contained" color="primary" size="large" onClick={setTrueIssearch} style={{marginTop: "50px"}}><AiOutlineSearch size={20}/></SearchButton>
             </Grid>
             <details open={detailOpened}>
                 <summary></summary>
                 <hr/>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <InputLabel className="custom-input-label">並び</InputLabel>
-                    <Select labelId="demo-select-small" id="demo-select-small" value={selectedValue} label="Age" onChange={handleChange}>
+                    <Select labelId="demo-select-small" id="demo-select-small" value={selectedOrderValue} label="Age" onChange={handleChange}>
                         {selectItems}
                     </Select>
                 </FormControl>
@@ -165,6 +178,7 @@ const SearchMenu = (props) => {
                     <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>
                     <Tooltip title="Xジョイン" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
                 </p>
+                <hr />
             </details>
         </>
     );

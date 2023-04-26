@@ -1,5 +1,5 @@
-import topImg from "../assets/images/woxram_logo_regular_400x120.png"
 import { Grid } from '@mui/material';
+import topImg from "../assets/images/woxram_logo_regular_400x120.png"
 
 const TopImg = () => {
     return (

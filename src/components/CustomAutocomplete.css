@@ -1,5 +1,6 @@
 .custom-autocomplete {
     position: relative;
+    width: 100%;
   }
   
   .suggestions-list {
@@ -25,4 +26,3 @@
 .suggestions-list .highlighted {
     background-color: #eee;
   }
-  

@@ -1,8 +1,8 @@
-
 // import './App.css';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-import Login from './components/login';
-import Home from './components/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './routes/login';
+import Home from './routes/Home';
+import About from './routes/About';
 
 
 
@@ -12,8 +12,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/about' element={<About />} />
     </Routes>
-    <Link to='/'>Back To Top</Link>
   </BrowserRouter>
   );
 }
