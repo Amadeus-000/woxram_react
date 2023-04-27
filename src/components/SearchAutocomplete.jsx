@@ -40,7 +40,7 @@ function SearchAutocomplete(props) {
     props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
 
     const lastWord = value.split(/[\s　]+/).pop();
-    if (lastWord.length > 1) {
+    if (lastWord.length > 2) {
       const filtered = suggestions.filter((suggestion) =>
         suggestion.toLowerCase().includes(lastWord.toLowerCase())
       );

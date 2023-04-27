@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Grid, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import MenuAppBar from '../components/MenuAppBar';
 
 const theme = createTheme({

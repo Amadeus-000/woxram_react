@@ -29,14 +29,22 @@ const SearchMenu = (props) => {
         console.log("getWoxramAPI");
         props.setLoading(true);
         // axios.get('http://133.130.96.237/dnbapi/woxsimulation/')
-        axios.get('https://woxram.com/api/test/',
-            {params: {keyword:query.get("keyword"), order:query.get("order"), sample:query.get("sample"), dlsite:query.get("dlsite"),page:query.get("page")}})
+        axios.get('https://woxram.com/api/woxramsearch/',
+            // {params: {keyword:query.get("keyword"), order:query.get("order"), sample:query.get("sample"), dlsite:query.get("dlsite"),page:query.get("page")}}
+            {params: {keyword:searchKeyword, sample:isSample?'on':'' , dlsite:isDlsite?'on':'' , order:selectedOrderValue, page:page }}
+        )
         .then(function (response) {
                 const result = JSON.stringify(response.data);
                 props.setLoading(false);
-                props.showResult(result)
-            })
-        };
+                setIsSearch(false);
+                setPage(1);
+                props.showResult(result);
+                
+        })
+        .catch(function (error) {
+                console.log(error);
+        });
+    };
     // クエリパラメータを取得
     let firststateSample=true;
     let firststateDlsite=true;
@@ -49,12 +57,12 @@ const SearchMenu = (props) => {
     if(query.get("keyword")!==null){
         // クエリパラメータがある場合はそれを初期値とする
         firstKeyword=query.get("keyword");
-        if(query.get("sample")=='on'){
+        if(query.get("sample")==='on'){
             firststateSample=true;
         }else{
             firststateSample=false;
         }
-        if(query.get("dlsite")=='on'){
+        if(query.get("dlsite")==='on'){
             firststateDlsite=true;
         }else{
             firststateDlsite=false;
@@ -77,6 +85,7 @@ const SearchMenu = (props) => {
     const [isSample, setIsSample] = useState(firststateSample);
     const [isDlsite, setIsDlsite] = useState(firststateDlsite);
     const [isXjoin, setIsXjoin] = useState(true);
+    const [page, setPage] = useState(query.get("page")?Number(query.get("page")):1);
     const [searchKeyword, setSearchKeyword] = useState(firstKeyword);
 
     const [selectedOrderValue, setSelectedOrderValue] = useState(firstorder);
@@ -110,13 +119,16 @@ const SearchMenu = (props) => {
     };
     const searchSequence = () => {
         console.log("searchSequence");
-        setIsSearch(false);
-        // 検索キーワードが空の場合は何もしない
-        if(searchKeyword===""){
-            return;
+        console.log(isSearch);
+        if(isSearch){
+            // setIsSearch(false);
+            // 検索キーワードが空の場合は何もしない
+            if(searchKeyword===""){
+                return;
+            }
+            setQueryParams();
+            getWoxramAPI();
         }
-        setQueryParams();
-        getWoxramAPI();
     };
     useCustomEffect(searchSequence, [isSearch]);
 
@@ -174,10 +186,10 @@ const SearchMenu = (props) => {
                     <label>DLsiteの作品ページを検索に含む　<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
                     <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
                 </p>
-                <p>
+                {/* <p>
                     <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>
                     <Tooltip title="Xジョイン" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
-                </p>
+                </p> */}
                 <hr />
             </details>
         </>
