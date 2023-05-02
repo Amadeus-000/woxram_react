@@ -21,7 +21,12 @@ const WorkCard = (props) => {
         textDecoration: "none!important",
     });
 
-
+    let key_num=0;
+    const keywords=[];
+    while( ('keyword'+String(key_num)) in props.workinfo ){
+        keywords.push( JSON.parse(props.workinfo.keyword0) );
+        key_num++;
+    }
     const Maintext=(props)=>{
         return(
             <>
@@ -30,7 +35,7 @@ const WorkCard = (props) => {
                 <div>{props.keyword}　一致数 : {props.hit_count}　<span style={{color:"gray"}}>{props.status}</span></div>
             </Grid>
             <Grid container>
-                <div style={{whiteSpace: 'pre-line',fontSize:"85%"}}>  
+                <div style={{whiteSpace: 'pre-line',fontSize:"75%"}}>  
                     {props.text_fh}
                     <strong><span style={{color:props.color}}>{props.keyword}</span></strong>
                     {props.text_lh}
@@ -40,7 +45,7 @@ const WorkCard = (props) => {
         );
     };
     const MaintextSet=()=>
-        (props.keywords).map((keyword)=>{
+        keywords.map((keyword)=>{
             return(
                 <>
                 <Maintext 
@@ -58,15 +63,15 @@ const WorkCard = (props) => {
         <>
             <Unit>
             <Grid container justifyContent="center" sx={{backgroundColor:"rgb(240,240,240)"}}>
-                <Link href={props.url} target="_blank" rel="noopener">
-                    <div><img src={props.url_img} style={{width:"100%"}}/></div>
+                <Link href={props.workinfo.url} target="_blank" rel="noopener">
+                    <div><img src={props.workinfo.url_img} style={{width:"100%"}}/></div>
                 </Link>
             </Grid>
             <Grid container>
-                <div><Link href={props.url} target="_blank" rel="noopener">{props.title}</Link></div>
+                <div><Link href={props.workinfo.url} target="_blank" rel="noopener">{props.workinfo.title}</Link></div>
             </Grid>
             <Grid container>
-                <div>{props.circle} <span style={{color:"gray"}}>{props.cv}</span> {props.scenario}</div>
+                <div>{props.workinfo.circle} <span style={{color:"gray"}}>{props.workinfo.cv}</span> {props.workinfo.scenario}</div>
             </Grid>
             <MaintextSet />
             </Unit>

@@ -21,6 +21,9 @@ const SearchButton = styled(Button)({
     width:"50%",
     borderRadius:"50px",
     margin:"20px",
+    '@media (max-width: 768px)': {
+        width:"65%",
+    },
 });
 
 const SearchMenu = (props) => {
@@ -29,7 +32,7 @@ const SearchMenu = (props) => {
         console.log("getWoxramAPI");
         props.setLoading(true);
         // axios.get('http://133.130.96.237/dnbapi/woxsimulation/')
-        axios.get('https://woxram.com/api/woxramsearch/',
+        axios.get('https://woxram.com/django/api/woxramsearch2/',
             // {params: {keyword:query.get("keyword"), order:query.get("order"), sample:query.get("sample"), dlsite:query.get("dlsite"),page:query.get("page")}}
             {params: {keyword:searchKeyword, sample:isSample?'on':'' , dlsite:isDlsite?'on':'' , order:selectedOrderValue, page:page }}
         )

@@ -6,7 +6,7 @@ import { Grid, Container } from '@mui/material';
 import MenuAppBar from '../components/MenuAppBar';
 import TopImg from '../components/TopImg';
 import SearchMenu from '../components/SearchMenu';
-import WorkCard from '../components/WorkCard';
+import WorkCard from '../components/WorkCard_v2';
 import Spinner from '../components/Spinner';
 import CustomPagination from '../components/CustomPagenation';
 
@@ -34,11 +34,11 @@ const theme = createTheme({
 const Home = () => {
     const [loading, setLoading] = useState(false);
     const [resultList, setResultList] = useState();
-    const [numberOfWorks, setNumberOfWorks] = useState(0);
+    const [numberOfWorks, setNumberOfWorks] = useState(-1);
 
     const showResult = (data) => {
         let data_obj=JSON.parse(data);
-        setResultList(data_obj[0].map((item)=><WorkCard title={item.title} url_img={item.url_img} url={item.url} circle={item.circle} cv={item.cv} scenario={item.scenario} keywords={item.keywords} />));
+        setResultList(data_obj[0].map((item)=><WorkCard workinfo={item} />));
         setNumberOfWorks(data_obj[1]);
     };
     return (
@@ -49,10 +49,10 @@ const Home = () => {
                     <TopImg />
                     <SearchMenu showResult={showResult} setLoading={setLoading}/>
                     {loading && <Grid container justifyContent="center"><Spinner /></Grid>}
-                    {numberOfWorks!==0 && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks} /></Grid>}
-                    {numberOfWorks!==0 && <div>検索結果 {numberOfWorks} 件</div>}
+                    {(numberOfWorks!==0 && numberOfWorks!==-1) && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks} /></Grid>}
+                    {numberOfWorks!==-1 && <div>検索結果 {numberOfWorks} 件</div>}
                     {resultList}
-                    {numberOfWorks!==0 && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks} /></Grid>}
+                    {(numberOfWorks!==0 && numberOfWorks!==-1) && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks} /></Grid>}
                 </Container>
             </div>
         </ThemeProvider>

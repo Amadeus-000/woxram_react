@@ -8,7 +8,7 @@ import './SearchAutocomplete.css';
 let suggestions = [
   'Apple','application','apply', 'Banana', 'Cherry', 'Date', 'Fig', 'Grape', 'Lemon', 'Mango', 'Orange', 'Pineapple', 'Strawberry'
 ];
-axios.get('https://woxram.com/api/getnamelist/')
+axios.get('https://woxram.com/django/api/getnamelist/')
   .then(function (response) {
       suggestions=response.data;
 })
@@ -40,7 +40,7 @@ function SearchAutocomplete(props) {
     props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
 
     const lastWord = value.split(/[\s　]+/).pop();
-    if (lastWord.length > 2) {
+    if (lastWord.length > 1) {
       const filtered = suggestions.filter((suggestion) =>
         suggestion.toLowerCase().includes(lastWord.toLowerCase())
       );

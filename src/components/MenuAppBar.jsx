@@ -51,13 +51,10 @@ const MenuAppBar = () => {
                         <ListItemButton component="a" href="/" rel="noopener noreferrer"><ListItemText primary="Home" /></ListItemButton>
                     </ListItem>
                     <ListItem>
-                        <ListItemButton component="a" href="/about/" rel="noopener noreferrer"><ListItemText primary="About" /></ListItemButton>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemButton component="a" href="/login/" rel="noopener noreferrer"><ListItemText primary="login" /></ListItemButton>
-                    </ListItem>
-                    <ListItem>
                         <ListItemButton component="a" href="https://twitter.com/woxram" rel="noopener noreferrer"><ListItemText primary="Twitter" /></ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton component="a" href="/about/" rel="noopener noreferrer"><ListItemText primary="About" /></ListItemButton>
                     </ListItem>
                 </List>
             </Drawer>
