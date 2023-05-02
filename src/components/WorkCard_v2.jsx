@@ -28,7 +28,6 @@ const WorkCard = (props) => {
         keywords.push( JSON.parse(props.workinfo['keyword'+String(key_num)]) );
         key_num++;
     }
-    console.log(keywords);
     const Maintext=(propsKeyword)=>{
         return(
             <>

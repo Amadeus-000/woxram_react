@@ -48,11 +48,30 @@ const SearchMenu = (props) => {
                 console.log(error);
         });
     };
+    const getWoxramAPIMemo = () => {
+        console.log("getWoxramAPIMemo");
+        props.setLoading(true);
+        axios.get('https://woxram.com/django/api/woxramsearch2/',
+            {params: {memo:memo}}
+        )
+        .then(function (response) {
+                const result = JSON.stringify(response.data);
+                props.setLoading(false);
+                setIsSearch(false);
+                setPage(1);
+                props.showResult(result);
+                
+        })
+        .catch(function (error) {
+                console.log(error);
+        });
+    };
     // クエリパラメータを取得
     let firststateSample=true;
     let firststateDlsite=true;
     let firstKeyword="";
     let firstorder=2;
+    let firstmemo="";
     // let page=query.get("page")?Number(query.get("page")):1;
     const search=useLocation().search;
     const query=new URLSearchParams(search);
@@ -74,11 +93,16 @@ const SearchMenu = (props) => {
             firstorder=Number(query.get("order"));
         };
     }
+    if(query.get("memo")!==null){
+        firstmemo=query.get("memo");
+    };
 
     // 初回レンダリング時にクエリパラメータにkeywordがある場合は検索APIを呼び出す
     const initProcess = () => {
         if(query.get("keyword")!==null){
             getWoxramAPI();
+        }else if(query.get("memo")!==null){
+            getWoxramAPIMemo();
         }
     };
     useEffect(initProcess, []);
@@ -90,6 +114,7 @@ const SearchMenu = (props) => {
     const [isXjoin, setIsXjoin] = useState(true);
     const [page, setPage] = useState(query.get("page")?Number(query.get("page")):1);
     const [searchKeyword, setSearchKeyword] = useState(firstKeyword);
+    const [memo, setMemo] = useState(firstmemo);
 
     const [selectedOrderValue, setSelectedOrderValue] = useState(firstorder);
     const handleChange = (e) => {

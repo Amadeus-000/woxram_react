@@ -16,7 +16,7 @@ const TweetMemo=(props)=>{
     const shareurl="https://twitter.com/intent/tweet?text="+props.keyword+br+"&url="+url;
     return(
         <div>
-            <Link href={shareurl} style={{display: 'flex', alignItems: 'center',marginRight:"10px"}} target="_blank" rel="noopener"><BiMemoryCard color='blue' size={20}/>メモ</Link>
+            {props.color==="red" &&<Link href={shareurl} style={{display: 'flex', alignItems: 'center'}} target="_blank" rel="noopener"><BiMemoryCard color='blue' size={20}/>メモ</Link>}
         </div>
     );
 };
