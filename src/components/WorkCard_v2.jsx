@@ -34,16 +34,6 @@ const WorkCard = (props) => {
             <hr />
             <Grid container justifyContent="space-between">
                 <Grid item><div>{propsKeyword.keyword}　一致数 : {propsKeyword.hit_count}　<span style={{color:"gray"}}>{propsKeyword.status}</span></div></Grid>
-                <Grid item><div>
-                    <TweetMemo 
-                        public_record_id={props.workinfo.public_record_id} 
-                        start_pos={propsKeyword.start_pos}
-                        end_pos={propsKeyword.end_pos}
-                        keyword={propsKeyword.keyword}
-                        chapter_num={propsKeyword.chapter_num}
-                        color={propsKeyword.color}
-                    />
-                </div></Grid>
             </Grid>
             <Grid container>
                 <div style={{whiteSpace: 'pre-line',fontSize:"75%"}}>  
@@ -51,6 +41,16 @@ const WorkCard = (props) => {
                     <strong><span style={{color:propsKeyword.color}}>{propsKeyword.keyword}</span></strong>
                     {propsKeyword.text_lh}
                 </div>
+            </Grid>
+            <Grid container>
+                <TweetMemo 
+                    public_record_id={props.workinfo.public_record_id} 
+                    start_pos={propsKeyword.start_pos}
+                    end_pos={propsKeyword.end_pos}
+                    keyword={propsKeyword.keyword}
+                    chapter_num={propsKeyword.chapter_num}
+                    color={propsKeyword.color}
+                />
             </Grid>
             </>
         );
