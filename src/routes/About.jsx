@@ -97,7 +97,7 @@ const About = () => {
                     本サービスに掲載している台本は転載禁止とします。利用したい場合はその作品の著作権者に許可を取ってください。
 
                     <hr />
-                    <div>version 1.2.0</div>
+                    <div>version 1.2.2</div>
 
 
                 </Container>
