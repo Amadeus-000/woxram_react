@@ -37,7 +37,7 @@ const TweetMemo=(props)=>{
     const shareurl="https://twitter.com/intent/tweet?text="+props.keyword+br+"&url="+url;
     return(
         <>
-            {props.color==="red" && <div style={{display:"flex", fontSize:"75%",marginTop:"3px"}}>
+            {props.color==="red" && <div style={{display:"flex", fontSize:"0.75rem",marginTop:"3px"}}>
                 <CopyToClipboardButton text={url}/>
                 <Link href={shareurl} style={{display: 'flex', alignItems: 'center',color:"#1da1f2"}} target="_blank" rel="noopener"><AiOutlineTwitter size={20}/>ツイート</Link>
             </div>}

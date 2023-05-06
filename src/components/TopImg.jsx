@@ -42,10 +42,10 @@ const TopImg = () => {
                 <HomeImg src={topImg} alt="woxram logo"/>
             </Grid>
             <Grid container justifyContent="center">
-                <div style={{fontSize:"15px"}}>Woxramはボイス・ASMRの<strong> "セリフ" </strong>を検索することができるサービスです。</div><br />
+                <div style={{marginBottom:"0.5rem"}}>Woxramはボイス・ASMRの<strong> "セリフ" </strong>を検索することができるサービスです。</div>
             </Grid>
             <Grid container justifyContent="center">
-                <div style={{fontSize:"15px"}}><a href={randSample}>ランダム検索例</a></div><br /><br />
+                <div style={{marginBottom:"0.5rem"}}><a href={randSample}>ランダム検索例</a></div>
             </Grid>
         </>
     );

@@ -33,10 +33,10 @@ const WorkCard = (props) => {
             <>
             <hr />
             <Grid container justifyContent="space-between">
-                <Grid item><div style={{fontSize:"85%",marginBottom:"3px"}}>{propsKeyword.keyword}　一致数 : {propsKeyword.hit_count}　<span style={{color:"gray"}}>{propsKeyword.status}</span></div></Grid>
+                <Grid item><div style={{fontSize:"0.85rem",marginBottom:"3px"}}>{propsKeyword.keyword}　一致数 : {propsKeyword.hit_count}　<span style={{color:"gray"}}>{propsKeyword.status}</span></div></Grid>
             </Grid>
             <Grid container>
-                <div style={{whiteSpace: 'pre-line',fontSize:"75%"}}>  
+                <div style={{whiteSpace: 'pre-line',fontSize:"0.75rem"}}>  
                     {propsKeyword.text_fh}
                     <strong><span style={{color:propsKeyword.color}}>{propsKeyword.keyword}</span></strong>
                     {propsKeyword.text_lh}

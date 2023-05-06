@@ -154,6 +154,7 @@ const SearchMenu = (props) => {
             if(searchKeyword===""){
                 return;
             }
+            document.activeElement.blur();
             setQueryParams();
             getWoxramAPI();
         }
@@ -208,11 +209,11 @@ const SearchMenu = (props) => {
                 </FormControl>
                 <div>
                     <label>サンプルAI書き起こし<Checkbox defaultChecked={isSample} color="primary" onChange={toggleSample} /></label>
-                    <Tooltip title="AIで作品サンプルを書き起こしたものを検索に含む。" arrow enterTouchDelay={50}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                    <Tooltip title="AIで作品サンプルを書き起こしたものを検索に含む。" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
                 </div>
                 <div>
                     <label>DLsite作品ページ<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
-                    <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow enterTouchDelay={50}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                    <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
                 </div>
                 {/* <p>
                     <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>

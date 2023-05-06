@@ -1,6 +1,7 @@
 import React from "react";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
+import Box from '@mui/material/Box';
 
 const CustomPagination = ({ numberOfWorks }) => {
   const location = useLocation();
@@ -16,6 +17,7 @@ const CustomPagination = ({ numberOfWorks }) => {
   const currentPage = new URLSearchParams(location.search).get("page") || 1;
 
   const pageCount=Math.ceil(numberOfWorks/50);
+
   return (
     <Pagination
       count={pageCount}
@@ -23,6 +25,12 @@ const CustomPagination = ({ numberOfWorks }) => {
       onChange={handleChange}
       variant="outlined"
       style={{ marginTop: "30px", marginBottom: "30px"}}
+      sx={{
+        transform: 'scale(0.8)',
+        '& .MuiPagination-ul': {
+          flexWrap: 'nowrap',
+        },
+      }}
     />
   );
 };

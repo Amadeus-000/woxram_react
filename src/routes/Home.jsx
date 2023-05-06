@@ -52,7 +52,7 @@ const Home = () => {
                     {(numberOfWorks!==0 && numberOfWorks!==-1) && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks} /></Grid>}
                     {numberOfWorks!==-1 && <div>検索結果 {numberOfWorks} 件</div>}
                     {resultList}
-                    {(numberOfWorks!==0 && numberOfWorks!==-1) && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks} /></Grid>}
+                    {(numberOfWorks!==0 && numberOfWorks!==-1) && <Grid container justifyContent="center"><CustomPagination numberOfWorks={numberOfWorks}/></Grid>}
                 </Container>
             </div>
         </ThemeProvider>
