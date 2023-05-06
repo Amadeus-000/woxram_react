@@ -15,11 +15,18 @@ axios.get('https://woxram.com/django/api/getnamelist/')
 
 const RoundedInput = styled("input")({
     borderRadius: "50px",
-    padding: "10px",
+    padding: "8px",
     paddingLeft: "20px",
+    paddingRight: "10px",
     width: "75%",
-    fontSize: "18px",
-    // margin: "0 auto",
+    fontSize: "16px",
+    '&:focus': {
+      outline: "none",
+    },
+    // 下と上は同じ意味だが下はstyledでは動かない
+    // input:focus {
+    //     outline: none;
+    // }
 });
 
 function SearchAutocomplete(props) {
@@ -35,6 +42,12 @@ function SearchAutocomplete(props) {
   }, [showSuggestions]);
 
   const updateInputValue = (event) => {
+    const value = event.target.value;
+    setInputValue(value);
+    props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
+  };
+
+  const updateInputValueSetAC = (event) => {
     const value = event.target.value;
     setInputValue(value);
     props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
@@ -61,6 +74,7 @@ function SearchAutocomplete(props) {
   };
 
   const handleBlur = () => {
+    console.log('handleBlur');
     setTimeout(() => setShowSuggestions(false), 100);
   };
   // 変更: フォーカスが当たったときに入力候補リストを表示する関数を追加
@@ -95,32 +109,33 @@ function SearchAutocomplete(props) {
 
   return (
    	<div className="custom-autocomplete">
-        <div className="input-container">
-			<RoundedInput
-				type="text"
-				value={inputValue}
-				onChange={updateInputValue}
-				onKeyDown={handleKeyDown} // 変更: キーボードイベントを追加
-				ref={inputRef}
-        onBlur={handleBlur} // 変更: onBlurイベントハンドラを追加
-        onFocus={handleFocus} // 変更: onFocusイベントハンドラを追加
-			/>
+      <div className="input-container">
+        <RoundedInput
+          type="text"
+          value={inputValue}
+          onChange={updateInputValue}
+          onCompositionEnd={updateInputValueSetAC}
+          onKeyDown={handleKeyDown} // 変更: キーボードイベントを追加
+          ref={inputRef}
+          onBlur={handleBlur} // 変更: onBlurイベントハンドラを追加
+          onFocus={handleFocus} // 変更: onFocusイベントハンドラを追加
+        />
         
-			{showSuggestions && (
-				<ul className="suggestions-list">
-					{filteredSuggestions.map((suggestion, index) => (
-						<li
-							key={index}
-							onClick={() => selectSuggestion(suggestion)}
-							className={highlightedIndex === index ? 'highlighted' : ''} // 変更
-						>
-							{suggestion}
-						</li>
-					))}
-				</ul>
-			)}
-            <div><AiOutlinePlus style={{margin:"7px"}} onClick={props.toggleDetailOpened}  size={30}/></div>
-        </div>
+        {showSuggestions && (
+          <ul className="suggestions-list">
+            {filteredSuggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                onClick={() => selectSuggestion(suggestion)}
+                className={highlightedIndex === index ? 'highlighted' : ''} // 変更
+              >
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        )}
+        <div><AiOutlinePlus style={{margin:"7px"}} onClick={props.toggleDetailOpened}  size={20}/></div>
+      </div>
 	</div>
 	);
 }

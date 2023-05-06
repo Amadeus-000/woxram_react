@@ -195,7 +195,7 @@ const SearchMenu = (props) => {
             </Grid>
             <Grid container spacing={2} justifyContent="center">
                 {/* <SearchButton variant="contained" color="primary" size="large" onClick={()=>{onKeydown("Enter")}}><AiOutlineSearch size={20}/></SearchButton> */}
-                <SearchButton variant="contained" color="primary" size="large" onClick={setTrueIssearch} style={{marginTop: "50px"}}><AiOutlineSearch size={20}/></SearchButton>
+                <SearchButton variant="contained" color="primary" size="large" onClick={setTrueIssearch} style={{marginTop: "25px"}}><AiOutlineSearch size={20}/></SearchButton>
             </Grid>
             <details open={detailOpened}>
                 <summary></summary>
@@ -206,14 +206,14 @@ const SearchMenu = (props) => {
                         {selectItems}
                     </Select>
                 </FormControl>
-                <p>
-                    <label>サンプルAI書き起こしを含む　<Checkbox defaultChecked={isSample} color="primary" onChange={toggleSample} /></label>
-                    <Tooltip title="AIで作品サンプルを書き起こしたものを検索に含む。" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
-                </p>
-                <p>
-                    <label>DLsiteの作品ページを検索に含む　<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
-                    <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
-                </p>
+                <div>
+                    <label>サンプルAI書き起こし<Checkbox defaultChecked={isSample} color="primary" onChange={toggleSample} /></label>
+                    <Tooltip title="AIで作品サンプルを書き起こしたものを検索に含む。" arrow enterTouchDelay={50}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                </div>
+                <div>
+                    <label>DLsite作品ページ<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
+                    <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow enterTouchDelay={50}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                </div>
                 {/* <p>
                     <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>
                     <Tooltip title="Xジョイン" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>

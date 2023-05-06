@@ -1,7 +1,6 @@
 
 import styled from "@emotion/styled";
 import { useState } from "react";
-import {BiMemoryCard} from 'react-icons/bi';
 import {AiOutlineCopy, AiOutlineTwitter} from 'react-icons/ai';
 
 
@@ -38,8 +37,8 @@ const TweetMemo=(props)=>{
     const shareurl="https://twitter.com/intent/tweet?text="+props.keyword+br+"&url="+url;
     return(
         <>
-            {props.color==="red" && <div style={{display:"flex"}}>
-                <CopyToClipboardButton text={shareurl}/>
+            {props.color==="red" && <div style={{display:"flex", fontSize:"75%",marginTop:"3px"}}>
+                <CopyToClipboardButton text={url}/>
                 <Link href={shareurl} style={{display: 'flex', alignItems: 'center',color:"#1da1f2"}} target="_blank" rel="noopener"><AiOutlineTwitter size={20}/>ツイート</Link>
             </div>}
         </>
