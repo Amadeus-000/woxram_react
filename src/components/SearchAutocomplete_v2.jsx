@@ -104,7 +104,7 @@ function SearchAutocomplete(props) {
   };
 
   const handleBlur = () => {
-    setTimeout(() => setShowSuggestions(false), 100);
+    setTimeout(() => setShowSuggestions(false), 250);
   };
   // 変更: フォーカスが当たったときに入力候補リストを表示する関数を追加
   const handleFocus = () => {
