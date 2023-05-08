@@ -11,7 +11,7 @@ import {FormControl, Select, MenuItem, InputLabel} from '@mui/material';
 import { Tooltip, IconButton } from "@mui/material";
 import { AiOutlineSearch, AiFillQuestionCircle} from 'react-icons/ai';
 
-import SearchAutocomplete from "./SearchAutocomplete";
+import SearchAutocomplete from "./SearchAutocomplete_v2";
 
 import './SearchMenu.css';
 

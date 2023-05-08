@@ -33,51 +33,29 @@ function SearchAutocomplete(props) {
   // 半角、全角スペースで区切る
   const splitRegex=/[\s　]+/;
   // 半角、全角スペース+@で区切る
-  const splitRegexAt=/[\s\u3000]@?/
-
-  const regexAlphanumeric = /^[A-Za-z0-9!-/:-@\[-`{-~]+$/;
+  const splitRegexAt=/[\s\u3000][@＠]?/
 
   const [inputValue, setInputValue] = useState(props.firstKeyword);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1); // 変更: ハイライトされた提案のインデックスを追加
   const inputRef = useRef();
+  const [inIME, setInIME] = useState(false); // 変更: IME入力中かどうかを判定するフラグを追加
 
   useEffect(() => {
     // 変更: クリック以外の方法で提案が選択されたときにハイライトをリセット
     setHighlightedIndex(-1);
   }, [showSuggestions]);
 
-  const updateInputValueEnNum = (event) => {
-    console.log('updateInputValueEnNum')
-    const value = event.target.value;
+  const setFalseIME = (event) => {
+    setTimeout(() => {
+    setInIME(false);
+    console.log("setFalseIME");
+    const value = (event.target.value);
     setInputValue(value);
     props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
-
     // const lastWord = value.split(splitRegexAt).pop();
-    const lastWord = ((value.split(splitRegexAt)).length===1)? value.split('@').pop() : value.split(splitRegexAt).pop();
-
-    if(regexAlphanumeric.test(lastWord)){
-      if (lastWord.length > 1) {
-        const filtered = suggestions.filter((suggestion) =>
-          suggestion.toLowerCase().includes(lastWord.toLowerCase())
-        );
-        setFilteredSuggestions(filtered);
-        setShowSuggestions(true);
-      } else {
-        setShowSuggestions(false);
-      }
-    }
-  };
-
-  const updateInputValueJa = (event) => {
-    console.log('updateInputValueJa');
-    const value = event.target.value;
-    setInputValue(value);
-    props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
-
-    // const lastWord = value.split(splitRegexAt).pop();
-    const lastWord = ((value.split(splitRegexAt)).length===1)? value.split('@').pop() : value.split(splitRegexAt).pop();
+    const lastWord = ((value.split(splitRegexAt)).length===1)? value.split(/[@＠]/).pop() : value.split(splitRegexAt).pop();
     console.log(value.split(splitRegexAt))
     console.log(lastWord);
     if (lastWord.length > 1) {
@@ -88,6 +66,30 @@ function SearchAutocomplete(props) {
       setShowSuggestions(true);
     } else {
       setShowSuggestions(false);
+    }
+    }, 100);
+  }
+
+  const updateInputValue = (event) => {
+    console.log('updateInputValue');
+    const value = (event.target.value);
+    setInputValue(value);
+    props.setSearchKeyword(value); // 変更: 親コンポーネントに入力値を渡す
+    console.log("IME: "+inIME);
+    if(!inIME){
+      // const lastWord = value.split(splitRegexAt).pop();
+      const lastWord = ((value.split(splitRegexAt)).length===1)? value.split('@').pop() : value.split(splitRegexAt).pop();
+      console.log(value.split(splitRegexAt))
+      console.log(lastWord);
+      if (lastWord.length > 1) {
+        const filtered = suggestions.filter((suggestion) =>
+          suggestion.toLowerCase().includes(lastWord.toLowerCase())
+        );
+        setFilteredSuggestions(filtered);
+        setShowSuggestions(true);
+      } else {
+        setShowSuggestions(false);
+      }
     }
   };
 
@@ -141,8 +143,9 @@ function SearchAutocomplete(props) {
         <RoundedInput
           type="text"
           value={inputValue}
-          onInput={updateInputValueEnNum}
-          onCompositionEnd={updateInputValueJa}
+          onInput={updateInputValue} // 変更: onInputイベントハンドラを追加
+          onCompositionStart={() => setInIME(true)} // 変更: IME入力中フラグを立てる
+          onCompositionEnd={setFalseIME} // 変更: IME入力中フラグを下ろす
           onKeyDown={handleKeyDown} // 変更: キーボードイベントを追加
           ref={inputRef}
           onBlur={handleBlur} // 変更: onBlurイベントハンドラを追加
