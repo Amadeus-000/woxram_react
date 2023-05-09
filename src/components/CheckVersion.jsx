@@ -1,7 +1,8 @@
 function checkVersion() {
     try{
         const request = new XMLHttpRequest();
-        const url = 'http://144.202.103.149/static/version2/version.json';
+        // const url = 'http://144.202.103.149/static/version2/version.json';
+        const url = 'https://woxram.com/static/version2/version.json';
         const cacheBuster = '?cacheBuster=' + new Date().getTime(); // キャッシュを回避するためのクエリパラメータを追加
         request.open('GET', url + cacheBuster, false); // 第3引数にfalseを指定して同期的にリクエストを送る
         request.send(null);
