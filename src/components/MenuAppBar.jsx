@@ -23,7 +23,7 @@ const theme = createTheme({
         MuiDrawer: {
             styleOverrides: {
                 paper: {
-                    width: 300,
+                    width: 200,
                     backgroundColor: "#282c34", // Drawerの背景色を変更
                     color: "#FFFFFF", // Drawer内のテキストの色を変更
                 },
@@ -80,6 +80,7 @@ const MenuAppBar = () => {
                         <ListItemButton component="a" href="/about/" rel="noopener noreferrer"><ListItemText primary="About" /></ListItemButton>
                     </ListItem>
                 </List>
+                <div style={{position: "fixed",bottom: "0",fontSize:"0.7rem"}}>version 1.2.6</div>
             </Drawer>
 		</ThemeProvider>
         </>

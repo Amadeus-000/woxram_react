@@ -12,6 +12,7 @@ import { Tooltip, IconButton } from "@mui/material";
 import { AiOutlineSearch, AiFillQuestionCircle} from 'react-icons/ai';
 
 import SearchAutocomplete from "./SearchAutocomplete_v2";
+import CheckVersion from "./CheckVersion";
 
 import './SearchMenu.css';
 
@@ -156,6 +157,10 @@ const SearchMenu = (props) => {
             }
             document.activeElement.blur();
             setQueryParams();
+            console.log("check version :" +String(CheckVersion()));
+            if(!CheckVersion()){
+                window.location.reload()
+            }
             getWoxramAPI();
         }
     };

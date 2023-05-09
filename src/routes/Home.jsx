@@ -9,6 +9,7 @@ import SearchMenu from '../components/SearchMenu';
 import WorkCard from '../components/WorkCard_v2';
 import Spinner from '../components/Spinner';
 import CustomPagination from '../components/CustomPagenation';
+import CheckVersion from '../components/CheckVersion';
 
 
 const theme = createTheme({
@@ -32,6 +33,7 @@ const theme = createTheme({
 
 
 const Home = () => {
+    console.log("Home.jsx");
     const [loading, setLoading] = useState(false);
     const [resultList, setResultList] = useState();
     const [numberOfWorks, setNumberOfWorks] = useState(-1);
