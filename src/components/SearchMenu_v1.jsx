@@ -125,14 +125,22 @@ const SearchMenu = (props) => {
 
     // クエリパラメータをURLにセットする関数
     const navigate = useNavigate();
-    const setQueryParams = () => {
+    const setQueryParam = (key,value) => {
         const queryParams = new URLSearchParams(window.location.search);
-        queryParams.set("keyword", searchKeyword);
-        if(isSample){queryParams.set("sample","on")}
-        if(isDlsite){queryParams.set("dlsite","on")}
-        queryParams.set("order",selectedOrderValue);
+        queryParams.set(key, value);
         navigate('/?'+queryParams.toString());
     };
+    const setQueryParams = () => {
+        deleteQueryParam();
+        setQueryParam("keyword",searchKeyword);
+        if(isSample){setQueryParam("sample","on")}
+        if(isDlsite){setQueryParam("dlsite","on")}
+        setQueryParam("order",selectedOrderValue);
+    };
+    const deleteQueryParam = () => {
+        navigate({ search: '' });
+    };
+
     // Enterキーを押したときisSearchがtrueになり検索apiを呼び出す
     const [isSearch, setIsSearch] = useState(false);
     const setTrueIssearch = () => {
@@ -186,11 +194,6 @@ const SearchMenu = (props) => {
         );
     });
 
-    window.addEventListener('popstate', (e) => {
-        console.log("browser back");
-        window.location.reload();
-    });
-
     return (
         <>
             <Grid container justifyContent="center">
@@ -203,26 +206,24 @@ const SearchMenu = (props) => {
             <details open={detailOpened}>
                 <summary></summary>
                 <hr/>
-                <div style={{paddingLeft:"0.7rem",paddingRight:"0.5rem"}}>
-                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                        <InputLabel className="custom-input-label">並び</InputLabel>
-                        <Select labelId="demo-select-small" id="demo-select-small" value={selectedOrderValue} label="Age" onChange={handleChange}>
-                            {selectItems}
-                        </Select>
-                    </FormControl>
-                    <div>
-                        <label>サンプルAI書き起こし<Checkbox defaultChecked={isSample} color="primary" onChange={toggleSample} /></label>
-                        <Tooltip title="AIで作品サンプルを書き起こしたものを検索に含む。" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
-                    </div>
-                    <div>
-                        <label>DLsite作品ページ<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
-                        <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
-                    </div>
-                    {/* <p>
-                        <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>
-                        <Tooltip title="Xジョイン" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
-                    </p> */}
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                    <InputLabel className="custom-input-label">並び</InputLabel>
+                    <Select labelId="demo-select-small" id="demo-select-small" value={selectedOrderValue} label="Age" onChange={handleChange}>
+                        {selectItems}
+                    </Select>
+                </FormControl>
+                <div>
+                    <label>サンプルAI書き起こし<Checkbox defaultChecked={isSample} color="primary" onChange={toggleSample} /></label>
+                    <Tooltip title="AIで作品サンプルを書き起こしたものを検索に含む。" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
                 </div>
+                <div>
+                    <label>DLsite作品ページ<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
+                    <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                </div>
+                {/* <p>
+                    <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>
+                    <Tooltip title="Xジョイン" arrow><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                </p> */}
                 <hr />
             </details>
         </>

@@ -9,7 +9,6 @@ import SearchMenu from '../components/SearchMenu';
 import WorkCard from '../components/WorkCard_v2';
 import Spinner from '../components/Spinner';
 import CustomPagination from '../components/CustomPagenation';
-import CheckVersion from '../components/CheckVersion';
 
 
 const theme = createTheme({
@@ -43,6 +42,7 @@ const Home = () => {
         setResultList(data_obj[0].map((item)=><WorkCard workinfo={item} />));
         setNumberOfWorks(data_obj[1]);
     };
+
     return (
 		<ThemeProvider theme={theme}>
             <div className="App">

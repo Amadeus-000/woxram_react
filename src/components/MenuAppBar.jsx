@@ -12,6 +12,8 @@ import useScrollDirection from "./hooks/useScrollDirection";
 
 import title from "../assets/images/woxram_logo_regular_360x60_white.png"
 import logoimg from "../assets/images/woxram_icon.png"
+import GlobalConstant from "./GlobalConstant";
+
 
 const theme = createTheme({
   palette: {
@@ -64,7 +66,7 @@ const MenuAppBar = () => {
                         <MenuIcon />
                     </IconButton>
                     <img src={logoimg} alt="woxram logo" style={{height:"30px",marginLeft:"5px"}} />
-                    <a href='/'><img src={title} alt="woxram logo" style={{height:"17px",marginTop:"5px",marginLeft:"10px"}} /></a>
+                    <a href='https://woxram.com/'><img src={title} alt="woxram logo" style={{height:"17px",marginTop:"5px",marginLeft:"10px"}} /></a>
                 </Toolbar>
             </StyledAppBar>
 
@@ -80,7 +82,7 @@ const MenuAppBar = () => {
                         <ListItemButton component="a" href="/about/" rel="noopener noreferrer"><ListItemText primary="About" /></ListItemButton>
                     </ListItem>
                 </List>
-                <div style={{position: "fixed",bottom: "0",fontSize:"0.7rem"}}>version 1.2.6</div>
+                <div style={{position: "fixed",bottom: "0",fontSize:"0.7rem"}}>version {GlobalConstant.version}</div>
             </Drawer>
 		</ThemeProvider>
         </>

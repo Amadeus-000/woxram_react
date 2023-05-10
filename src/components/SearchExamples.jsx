@@ -36,7 +36,7 @@ const SearchExamples = () => {
         examples.map((example)=>{
             return (
                 <>
-                <div style={{marginRight:"1rem"}}><a href={example[1]}>{example[0]}</a></div>
+                <div style={{marginRight:"1rem",marginBottom:"0.3rem"}}><a href={example[1]}>{example[0]}</a></div>
                 </>
             );
         });

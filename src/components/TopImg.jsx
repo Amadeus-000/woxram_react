@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 
 import SearchExamples from './SearchExamples';
 
+import { useNavigate } from 'react-router-dom';
 
 const TopImg = () => {
     const HomeImg = styled.img`
@@ -13,7 +14,6 @@ const TopImg = () => {
             width: 50%;
         }
     `;
-
     return (
         <>
             <Grid container justifyContent="center">
