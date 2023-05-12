@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import React from "react";
 import { useState,useEffect } from "react";
 import axios from 'axios';
-import {useLocation, useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate,useSearchParams } from 'react-router-dom';
 
 
 import { Grid, Checkbox} from '@mui/material';
@@ -116,6 +116,7 @@ const SearchMenu = (props) => {
     const [page, setPage] = useState(query.get("page")?Number(query.get("page")):1);
     const [searchKeyword, setSearchKeyword] = useState(firstKeyword);
     const [memo, setMemo] = useState(firstmemo);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [selectedOrderValue, setSelectedOrderValue] = useState(firstorder);
     const handleChange = (e) => {
@@ -126,12 +127,25 @@ const SearchMenu = (props) => {
     // クエリパラメータをURLにセットする関数
     const navigate = useNavigate();
     const setQueryParams = () => {
-        const queryParams = new URLSearchParams(window.location.search);
-        queryParams.set("keyword", searchKeyword);
-        if(isSample){queryParams.set("sample","on")}
-        if(isDlsite){queryParams.set("dlsite","on")}
-        queryParams.set("order",selectedOrderValue);
-        navigate('/?'+queryParams.toString());
+        // const queryParams = new URLSearchParams(window.location.search);
+        // queryParams.set("keyword", searchKeyword);
+        // if(isSample){queryParams.set("sample","on")}
+        // if(isDlsite){queryParams.set("dlsite","on")}
+        // queryParams.set("order",selectedOrderValue);
+        // navigate('/?'+queryParams.toString());
+        searchParams.set("keyword", searchKeyword);
+        if(isSample){searchParams.set("sample","on")}
+        if(isDlsite){searchParams.set("dlsite","on")}
+        searchParams.set("order",selectedOrderValue);
+        setSearchParams(searchParams);
+    };
+    const deleteQueryParam = () => {
+        searchParams.delete('keyword');
+        searchParams.delete('sample');
+        searchParams.delete('dlsite');
+        searchParams.delete('order');
+        searchParams.delete('page');
+        setSearchParams(searchParams);
     };
     // Enterキーを押したときisSearchがtrueになり検索apiを呼び出す
     const [isSearch, setIsSearch] = useState(false);
@@ -148,6 +162,7 @@ const SearchMenu = (props) => {
                 return;
             }
             document.activeElement.blur();
+            deleteQueryParam()
             setQueryParams();
             console.log("check version :" +String(CheckVersion()));
             if(!CheckVersion()){
