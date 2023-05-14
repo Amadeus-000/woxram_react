@@ -126,6 +126,22 @@ const SearchMenu = (props) => {
 
     // クエリパラメータをURLにセットする関数
     const navigate = useNavigate();
+    const setDelQueryParams = () => {
+        searchParams.set("keyword", searchKeyword);
+        if(isSample){
+            searchParams.set("sample","on")
+        }else{
+            searchParams.delete("sample")
+        }
+        if(isDlsite){
+            searchParams.set("dlsite","on")
+        }else{
+            searchParams.delete("dlsite")
+        }
+        searchParams.set("order",selectedOrderValue);
+        searchParams.delete("page")
+        setSearchParams(searchParams);
+    };
     const setQueryParams = () => {
         // const queryParams = new URLSearchParams(window.location.search);
         // queryParams.set("keyword", searchKeyword);
@@ -140,13 +156,34 @@ const SearchMenu = (props) => {
         setSearchParams(searchParams);
     };
     const deleteQueryParam = () => {
-        searchParams.delete('keyword');
-        searchParams.delete('sample');
-        searchParams.delete('dlsite');
-        searchParams.delete('order');
-        searchParams.delete('page');
-        setSearchParams(searchParams);
+        // searchParams.delete('keyword');
+        // searchParams.delete('sample');
+        // searchParams.delete('dlsite');
+        // searchParams.delete('order');
+        // searchParams.delete('page');
+        // setSearchParams(searchParams);
+
+        // 現在のURLを取得
+        let url = new URL(window.location.href);
+
+        // URLSearchParamsオブジェクトを取得
+        let searchParams_local = url.searchParams;
+
+        // パラメータを削除
+        searchParams_local.delete('keyword');
+        searchParams_local.delete('sample');
+        searchParams_local.delete('dlsite');
+        searchParams_local.delete('order');
+        searchParams_local.delete('keyword');
+
+        // 新しいパラメータをURLに設定
+        url.search = searchParams_local.toString();
+
+        // 現在のURLを新しいURLで置き換え
+        // window.history.replaceState(null, null, url.toString());
     };
+
+    
     // Enterキーを押したときisSearchがtrueになり検索apiを呼び出す
     const [isSearch, setIsSearch] = useState(false);
     const setTrueIssearch = () => {
@@ -162,8 +199,9 @@ const SearchMenu = (props) => {
                 return;
             }
             document.activeElement.blur();
-            deleteQueryParam()
-            setQueryParams();
+            // deleteQueryParam();
+            // setQueryParams();
+            setDelQueryParams();
             console.log("check version :" +String(CheckVersion()));
             if(!CheckVersion()){
                 window.location.reload()
