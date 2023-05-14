@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import styled from "@emotion/styled";
 import axios from 'axios';
 
+import GlobalConstant from './GlobalConstant';
+import {StyledLink} from './MyStyledComponents';
+
 
 const SearchExamples = () => {
     const DivSE=styled("div")({
@@ -36,13 +39,13 @@ const SearchExamples = () => {
         examples.map((example)=>{
             return (
                 <>
-                <div style={{marginRight:"1rem",marginBottom:"0.3rem"}}><a href={example[1]}>{example[0]}</a></div>
+                <div style={{marginRight:"1rem",marginBottom:"0.3rem"}}><StyledLink href={example[1]}>{example[0]}</StyledLink></div>
                 </>
             );
         });
     return (
         <>
-            <div onClick={toggleOpend} style={{textAlign:"center",fontSize:"1.2rem",textDecoration:"underline",color:"blue"}}>検索例</div>
+            <div onClick={toggleOpend} style={{textAlign:"center",fontSize:"1.2rem",color:GlobalConstant.linkcolor}}>検索例</div>
             <div>
             <details open={isOpened}>
                 <summary></summary>

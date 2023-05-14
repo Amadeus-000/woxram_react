@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 
 import SearchExamples from './SearchExamples';
 
-import { useNavigate } from 'react-router-dom';
+import GlobalConstant from './GlobalConstant';
+import {StyledLink} from './MyStyledComponents';
 
 const TopImg = () => {
     const HomeImg = styled.img`
@@ -20,7 +21,10 @@ const TopImg = () => {
                 <HomeImg src={topImg} alt="woxram logo"/>
             </Grid>
             <Grid container justifyContent="center">
-                <div style={{marginBottom:"0.5rem"}}>Woxramはボイス・ASMRの<strong> "セリフ" </strong>を検索することができるサービスです。</div>
+                <div style={{marginBottom:"0.5rem"}}><StyledLink href='/ios-app-instruction'>iOSアプリ</StyledLink> / <StyledLink href='/android-app-instruction'>Androidアプリ</StyledLink></div>
+            </Grid>
+            <Grid container justifyContent="center">
+                <div style={{marginBottom:"0.5rem"}}>Woxramはボイス・ASMRの<strong style={{color:GlobalConstant.color1}}> "セリフ" </strong>を検索することができるサービスです。</div>
             </Grid>
             <Grid container justifyContent="center">
                 <div style={{marginBottom:"0.5rem"}}><SearchExamples /></div>
