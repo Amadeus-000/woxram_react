@@ -13,6 +13,7 @@ import useScrollDirection from "./hooks/useScrollDirection";
 import title from "../assets/images/woxram_logo_regular_360x60_white.png"
 import logoimg from "../assets/images/woxram_icon.png"
 import GlobalConstant from "./GlobalConstant";
+import axios from 'axios';
 
 
 const theme = createTheme({
@@ -35,6 +36,11 @@ const theme = createTheme({
 });
 
 const MenuAppBar = () => {
+    const [databaseDate, setDatabaseDate] = useState("");
+    axios.get('https://woxram.com/django/simpleapi/checkdatabaseupdateinfo/'
+    ).then(function (response) {
+        setDatabaseDate(response.data);
+    })
     const [drawerOpened, setDrawerOpened] = useState(false);
 
     const scrollDirection = useScrollDirection();
@@ -82,6 +88,7 @@ const MenuAppBar = () => {
                         <ListItemButton component="a" href="/about/" rel="noopener noreferrer"><ListItemText primary="About" /></ListItemButton>
                     </ListItem>
                 </List>
+                <div style={{position: "fixed",bottom: "0.7rem",fontSize:"0.7rem"}}>{databaseDate}</div>
                 <div style={{position: "fixed",bottom: "0",fontSize:"0.7rem"}}>version {GlobalConstant.version}</div>
             </Drawer>
 		</ThemeProvider>
