@@ -4,7 +4,10 @@ import styled from "@emotion/styled";
 import axios from 'axios';
 
 import GlobalConstant from './GlobalConstant';
-import {StyledLink} from './MyStyledComponents';
+import {StyledLink,NoUnderLineLink} from './MyStyledComponents';
+
+import Button from '@mui/material/Button';
+
 
 
 const SearchExamples = () => {
@@ -13,7 +16,7 @@ const SearchExamples = () => {
         flexWrap: "wrap",
         paddingRight:"0.5rem",
         paddingLeft:"0.5rem",
-        fontSize:"0.8rem"
+        fontSize:"0.8rem",
     });
 
     const [examples, setExamples] = useState([]);
@@ -35,11 +38,31 @@ const SearchExamples = () => {
     const toggleOpend=()=>{
         setIsOpened(!isOpened);
     };
+    let toggleColor=true;
+    const fontGray={color:"#242424"}
     const Examples=()=>
         examples.map((example)=>{
+            toggleColor=!toggleColor;
             return (
                 <>
-                <div style={{marginRight:"1rem",marginBottom:"0.3rem"}}><StyledLink href={example[1]}>{example[0]}</StyledLink></div>
+                {/* <div style={{marginRight:"1rem",marginBottom:"0.3rem"}}><StyledLink href={example[1]} style={toggleColor?fontGray:{}}>{example[0]}</StyledLink></div> */}
+                <Button
+                    color="primary"
+                    size="small"
+                    variant="outlined"
+                    style={{
+                        marginRight:"0.5rem",
+                        marginBottom:"0.2rem",
+                        paddingTop:"0.15rem",
+                        paddingBottom:"0rem",
+                        paddingLeft:"0.2rem",
+                        paddingRight:"0.2rem",
+                        fontSize:"0.8rem",
+                        borderColor:"#dcdcdc"
+                    }}
+                >
+                    <NoUnderLineLink href={example[1]}>{example[0]}</NoUnderLineLink>
+                </Button>
                 </>
             );
         });

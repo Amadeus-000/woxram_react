@@ -13,9 +13,9 @@ import CustomPagination from '../components/CustomPagenation';
 
 const theme = createTheme({
     palette: {
-      primary: {
-        main: "#282c34", // この色は任意のカラーコードに置き換えることができます。
-      },
+        primary: {
+            main: "#282c34", // この色は任意のカラーコードに置き換えることができます。
+        },
     },
     components: {
           MuiDrawer: {
