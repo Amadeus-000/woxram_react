@@ -69,7 +69,7 @@ const SearchMenu = (props) => {
     };
     // クエリパラメータを取得
     let firststateSample=true;
-    let firststateDlsite=false;
+    let firststateDlsite=true;
     let firstKeyword="";
     let firstorder=2;
     let firstmemo="";
@@ -269,7 +269,7 @@ const SearchMenu = (props) => {
                     </div>
                     <div>
                         <label>DLsite作品ページ<Checkbox defaultChecked={isDlsite} color="primary" onChange={toggleDlsite}/></label>
-                        <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
+                        <Tooltip title="DLsiteの作品ページのタイトル、説明を検索の内容に含む。セリフがヒットしたときは赤い文字、作品ページ内の情報がヒットしたときは青い文字で表示されます" arrow enterTouchDelay={20}><IconButton><AiFillQuestionCircle /></IconButton></Tooltip>
                     </div>
                     {/* <p>
                         <label>Xジョイン　<Checkbox defaultChecked={isXjoin} color="primary" onChange={toggleXjoin}/></label>
