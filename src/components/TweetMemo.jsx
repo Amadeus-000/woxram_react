@@ -22,7 +22,7 @@ const TweetMemo=(props)=>{
           }
           console.log(data)
           const url="https://woxram.com/django/account/getmemoid/";
-          axios.post(url,data)
+          axios.get(url,{params:data})
           .then((res)=>{
             navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
             setMsg("コピー済　");
