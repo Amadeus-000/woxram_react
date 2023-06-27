@@ -10,6 +10,8 @@ import WorkCard from '../components/WorkCard_v2';
 import Spinner from '../components/Spinner';
 import CustomPagination from '../components/CustomPagenation';
 
+import ScrollObserver from '../components/common/ScrollObserver';
+
 
 const theme = createTheme({
     palette: {
@@ -46,8 +48,9 @@ const Home = () => {
     return (
 		<ThemeProvider theme={theme}>
             <div className="App">
-                <MenuAppBar />
-                <Container maxWidth="lg" sx={{marginTop:"100px"}}>
+                <ScrollObserver />
+                <MenuAppBar/>
+                <Container maxWidth="lg" sx={{marginTop:"5rem"}}>
                     <TopImg />
                     <SearchMenu showResult={showResult} setLoading={setLoading}/>
                     {loading && <Grid container justifyContent="center"><Spinner /></Grid>}

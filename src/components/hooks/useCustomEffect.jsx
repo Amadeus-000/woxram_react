@@ -13,3 +13,6 @@ function useCustomEffect(callback, dependencies) {
 }
 
 export default useCustomEffect;
+
+
+// 初回実行時にはcallbackを実行しないカスタムフック
