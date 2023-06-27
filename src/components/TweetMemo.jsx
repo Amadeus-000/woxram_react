@@ -12,9 +12,17 @@ const TweetMemo=(props)=>{
     const CopyToClipboardButton = () => {
       const handleCopy = async () => {
         try {
-          const url="https://woxram.com/django/account/getmemoid/?public_record_id="+props.public_record_id+"&chapter_num="+props.chapter_num+"&start_pos="+props.start_pos+"&end_pos="+props.end_pos+"&color="+props.color;
-          console.log(url);
-          axios.get(url)
+          const data={
+            public_record_id:props.public_record_id,
+            chapter_name:props.chapter_name,
+            text_fh:props.text_fh,
+            keyword:props.keyword,
+            text_lh:props.text_lh,
+            color:props.color
+          }
+          console.log(data)
+          const url="https://woxram.com/django/account/getmemoid/";
+          axios.post(url,data)
           .then((res)=>{
             navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
             setMsg("コピー済　");

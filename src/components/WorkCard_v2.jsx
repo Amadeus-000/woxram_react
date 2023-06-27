@@ -44,11 +44,11 @@ const WorkCard = (props) => {
             </Grid>
             <Grid container>
                 <TweetMemo 
-                    public_record_id={props.workinfo.public_record_id} 
-                    start_pos={propsKeyword.start_pos}
-                    end_pos={propsKeyword.end_pos}
+                    public_record_id={props.workinfo.public_record_id}
+                    text_fh={propsKeyword.text_fh}
                     keyword={propsKeyword.keyword}
-                    chapter_num={propsKeyword.chapter_num}
+                    text_lh={propsKeyword.text_lh}
+                    chapter_name={propsKeyword.chapter_name}
                     color={propsKeyword.color}
                 />
             </Grid>
@@ -66,9 +66,7 @@ const WorkCard = (props) => {
                     hit_count={keyword.hit_count}
                     status={keyword.status}
                     color={keyword.color}
-                    start_pos={keyword.start_pos}
-                    end_pos={keyword.end_pos}
-                    chapter_num={keyword.chapter_num}
+                    chapter_name={keyword.chapter_name}
                 />
                 </>
             );
