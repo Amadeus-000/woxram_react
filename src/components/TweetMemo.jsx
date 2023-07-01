@@ -14,9 +14,6 @@ const TweetMemo=(props)=>{
     const CopyToClipboardButton = () => {
       const handleCopy = async () => {
         clipboardCopy("WOXRAM");
-        // const copyClipboard=async (text)=>{
-        //   await clipboardCopy(text);
-        // };
         try {
           const data={
             public_record_id:props.public_record_id,
@@ -41,7 +38,30 @@ const TweetMemo=(props)=>{
           console.error("Failed to copy text: ", err);
         }
       };
-      return <span  onClick={handleCopy} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={color} size={20}/>{msg}</span>;
+
+      const handleCopy2 = async () => {
+        clipboardCopy("WOXRAM");     
+        const data={
+          public_record_id:props.public_record_id,
+          chapter_name:props.chapter_name,
+          text_fh:props.text_fh,
+          keyword:props.keyword,
+          text_lh:props.text_lh,
+          color:props.color
+        }
+        console.log(data)
+        const url="https://woxram.com/django/account/getmemoid/";
+        axios.get(url,{params:data})
+        .then((res)=>{
+          // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
+          clipboardCopy("https://woxram.com/?memo=");
+          setMsg("コピー済　");
+          setColor("black");
+          setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
+          console.log("Text copied to clipboard");
+        });
+      };
+      return <span  onClick={handleCopy2} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={color} size={20}/>{msg}</span>;
     };
 
     const [msg, setMsg]=useState("コピー　");
