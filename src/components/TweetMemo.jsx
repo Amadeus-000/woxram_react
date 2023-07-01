@@ -13,6 +13,7 @@ const TweetMemo=(props)=>{
 
     const CopyToClipboardButton = () => {
       const handleCopy = async () => {
+        clipboardCopy("WOXRAM");
         // const copyClipboard=async (text)=>{
         //   await clipboardCopy(text);
         // };
