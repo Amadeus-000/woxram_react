@@ -30,7 +30,7 @@ const TweetMemo=(props)=>{
           axios.get(url,{params:data})
           .then((res)=>{
             // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
-            clipboardCopy("https://woxram.com/?memo="+res.data);
+            clipboardCopy("https://woxram.com/?memo=");
             setMsg("コピー済　");
             setColor("black");
             setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
