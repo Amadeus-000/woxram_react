@@ -4,8 +4,6 @@ import { useState } from "react";
 import {AiOutlineCopy, AiOutlineTwitter} from 'react-icons/ai';
 import axios from "axios";
 
-import clipboardCopy from 'clipboard-copy';
-
 const TweetMemo=(props)=>{
     const Link = styled("a")({
         textDecoration: "none!important",
@@ -13,7 +11,6 @@ const TweetMemo=(props)=>{
 
     const CopyToClipboardButton = () => {
       const handleCopy = async () => {
-        clipboardCopy("WOXRAM");
         try {
           const data={
             public_record_id:props.public_record_id,
@@ -27,11 +24,11 @@ const TweetMemo=(props)=>{
           const url="https://woxram.com/django/account/getmemoid/";
           axios.get(url,{params:data})
           .then((res)=>{
-            // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
-            clipboardCopy("https://woxram.com/?memo=");
+            navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
             setMsg("コピー済　");
             setColor("black");
             setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
+            setMemourl("https://woxram.com/?memo="+res.data);
             console.log("Text copied to clipboard");
           });
         } catch (err) {
@@ -39,39 +36,29 @@ const TweetMemo=(props)=>{
         }
       };
 
-      const handleCopy2 = async () => { 
-        const data={
-          public_record_id:props.public_record_id,
-          chapter_name:props.chapter_name,
-          text_fh:props.text_fh,
-          keyword:props.keyword,
-          text_lh:props.text_lh,
-          color:props.color
-        }
-        console.log(data)
-        const url="https://woxram.com/django/account/getmemoid/";
-        navigator.clipboard.writeText("https://woxram.com/?memo=1");
-        const res = await axios.get(url,{params:data})
-        // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
-        // clipboardCopy("https://woxram.com/?memo=2");
-        setMsg("コピー済　");
-        setColor("black");
-        setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
-        console.log("Text copied to clipboard");
-      };
-      return <span  onClick={handleCopy2} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={color} size={20}/>{msg}</span>;
+      return <span  onClick={handleCopy} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={color} size={20}/>{msg}</span>;
+    };
+    const isIOS = () => {
+      console.log(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+    const handleCopyIOS = () => {
+      navigator.clipboard.writeText(memourl);
     };
 
     const [msg, setMsg]=useState("コピー　");
     const [color,setColor]=useState("green");
-    // const br="%0A";
     const [shareurl,setShareurl]=useState("");
-    // const memo=encodeString( props.public_record_id+"/"+props.chapter_num+"/"+props.start_pos+"/"+props.end_pos+"/"+(props.color==="red"?0:1) );
-    // const url="https://woxram.com/?memo="+memo;
-    // const shareurl="https://twitter.com/intent/tweet?text="+props.keyword+br+"&url="+url;
+    const [memourl,setMemourl]=useState("");
+    // const br="%0A";
+    
     return(
         <>
             {props.color==="red" && <div style={{display:"flex", fontSize:"0.75rem",marginTop:"3px"}}>
+                {isIOS() && memourl
+                  ?<span  onClick={handleCopyIOS} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={"green"} size={20}/>クリップボート</span>
+                  :<CopyToClipboardButton/>
+                }
                 <CopyToClipboardButton/>
                 {shareurl ? <Link href={shareurl} style={{display: 'flex', alignItems: 'center',color:"#1da1f2"}} target="_blank" rel="noopener"><AiOutlineTwitter size={20}/>ツイート</Link>:<></>}
             </div>}
