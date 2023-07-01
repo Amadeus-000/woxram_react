@@ -50,9 +50,10 @@ const TweetMemo=(props)=>{
         }
         console.log(data)
         const url="https://woxram.com/django/account/getmemoid/";
+        clipboardCopy("https://woxram.com/?memo=1");
         const res = await axios.get(url,{params:data})
         // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
-        await clipboardCopy("https://woxram.com/?memo=");
+        clipboardCopy("https://woxram.com/?memo=2");
         setMsg("コピー済　");
         setColor("black");
         setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
