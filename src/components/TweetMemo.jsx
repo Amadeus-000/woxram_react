@@ -39,8 +39,7 @@ const TweetMemo=(props)=>{
         }
       };
 
-      const handleCopy2 = async () => {
-        clipboardCopy("WOXRAM");     
+      const handleCopy2 = async () => { 
         const data={
           public_record_id:props.public_record_id,
           chapter_name:props.chapter_name,
