@@ -59,7 +59,6 @@ const TweetMemo=(props)=>{
                   ?<span  onClick={handleCopyIOS} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={"green"} size={20}/>クリップボート</span>
                   :<CopyToClipboardButton/>
                 }
-                <CopyToClipboardButton/>
                 {shareurl ? <Link href={shareurl} style={{display: 'flex', alignItems: 'center',color:"#1da1f2"}} target="_blank" rel="noopener"><AiOutlineTwitter size={20}/>ツイート</Link>:<></>}
             </div>}
         </>
