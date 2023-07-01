@@ -4,6 +4,8 @@ import { useState } from "react";
 import {AiOutlineCopy, AiOutlineTwitter} from 'react-icons/ai';
 import axios from "axios";
 
+import clipboardCopy from 'clipboard-copy';
+
 const TweetMemo=(props)=>{
     const Link = styled("a")({
         textDecoration: "none!important",
@@ -11,6 +13,9 @@ const TweetMemo=(props)=>{
 
     const CopyToClipboardButton = () => {
       const handleCopy = async () => {
+        // const copyClipboard=async (text)=>{
+        //   await clipboardCopy(text);
+        // };
         try {
           const data={
             public_record_id:props.public_record_id,
@@ -24,7 +29,8 @@ const TweetMemo=(props)=>{
           const url="https://woxram.com/django/account/getmemoid/";
           axios.get(url,{params:data})
           .then((res)=>{
-            navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
+            // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
+            clipboardCopy("https://woxram.com/?memo="+res.data);
             setMsg("コピー済　");
             setColor("black");
             setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
