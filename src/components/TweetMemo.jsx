@@ -52,7 +52,7 @@ const TweetMemo=(props)=>{
         const url="https://woxram.com/django/account/getmemoid/";
         const res = await axios.get(url,{params:data})
         // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
-        clipboardCopy("https://woxram.com/?memo=");
+        await clipboardCopy("https://woxram.com/?memo=");
         setMsg("コピー済　");
         setColor("black");
         setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
