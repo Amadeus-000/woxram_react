@@ -51,15 +51,13 @@ const TweetMemo=(props)=>{
         }
         console.log(data)
         const url="https://woxram.com/django/account/getmemoid/";
-        axios.get(url,{params:data})
-        .then((res)=>{
-          // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
-          clipboardCopy("https://woxram.com/?memo=");
-          setMsg("コピー済　");
-          setColor("black");
-          setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
-          console.log("Text copied to clipboard");
-        });
+        const res = await axios.get(url,{params:data})
+        // navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
+        clipboardCopy("https://woxram.com/?memo=");
+        setMsg("コピー済　");
+        setColor("black");
+        setShareurl("https://twitter.com/intent/tweet?text=https://woxram.com/?memo="+res.data);
+        console.log("Text copied to clipboard");
       };
       return <span  onClick={handleCopy2} style={{display: 'flex', alignItems: 'center'}}><AiOutlineCopy color={color} size={20}/>{msg}</span>;
     };
