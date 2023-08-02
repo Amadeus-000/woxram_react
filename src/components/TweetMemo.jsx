@@ -21,7 +21,7 @@ const TweetMemo=(props)=>{
             color:props.color
           }
           console.log(data)
-          const url="https://woxram.com/django/account/getmemoid/";
+          const url="https://woxram-api.com/account/getmemoid/";
           axios.get(url,{params:data})
           .then((res)=>{
             navigator.clipboard.writeText("https://woxram.com/?memo="+res.data);
