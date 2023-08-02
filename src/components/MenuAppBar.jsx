@@ -42,7 +42,7 @@ const theme = createTheme({
 const MenuAppBar = () => {
     // console.log("MenuAppBar");
     const [databaseDate, setDatabaseDate] = useState("");
-    axios.get('https://woxram.com/django/simpleapi/checkdatabaseupdateinfo/'
+    axios.get('https://woxram-api.com/search/getdatabaseinfo/'
     ).then(function (response) {
         setDatabaseDate(response.data);
     })

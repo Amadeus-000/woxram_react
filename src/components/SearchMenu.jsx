@@ -33,7 +33,7 @@ const SearchMenu = (props) => {
         console.log("getWoxramAPI");
         props.setLoading(true);
         // axios.get('http://133.130.96.237/dnbapi/woxsimulation/')
-        axios.get('https://woxram.com/django/api/woxramsearch2/',
+        axios.get('https://woxram-api.com/search/',
             // {params: {keyword:query.get("keyword"), order:query.get("order"), sample:query.get("sample"), dlsite:query.get("dlsite"),page:query.get("page")}}
             {params: {keyword:searchKeyword, sample:isSample?'on':'' , dlsite:isDlsite?'on':'' , order:selectedOrderValue, page:page }}
         )
@@ -52,7 +52,7 @@ const SearchMenu = (props) => {
     const getWoxramAPIMemo = () => {
         console.log("getWoxramAPIMemo");
         props.setLoading(true);
-        axios.get('https://woxram.com/django/api/woxramsearch2/',
+        axios.get('https://woxram-api.com/search/',
             {params: {memo:memo}}
         )
         .then(function (response) {

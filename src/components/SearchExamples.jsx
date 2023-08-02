@@ -23,7 +23,7 @@ const SearchExamples = () => {
     const [isOpened, setIsOpened] = useState(false);
     // let result=[];
     useEffect(() => {
-        axios.get('https://woxram.com/django/api/randsearchexample/'
+        axios.get('https://woxram-api.com/search/randsearchexample/'
         )
         .then(function (response) {
             console.log(response.data);
