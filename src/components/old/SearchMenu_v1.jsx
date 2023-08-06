@@ -11,12 +11,12 @@ import {FormControl, Select, MenuItem, InputLabel} from '@mui/material';
 import { Tooltip, IconButton } from "@mui/material";
 import { AiOutlineSearch, AiFillQuestionCircle} from 'react-icons/ai';
 
-import SearchAutocomplete from "./SearchAutocomplete_v2";
-import CheckVersion from "./CheckVersion";
+import SearchAutocomplete from "../SearchAutocomplete_v2";
+import CheckVersion from "../CheckVersion";
 
 import './SearchMenu.css';
 
-import useCustomEffect from './hooks/useCustomEffect';
+import useCustomEffect from '../hooks/useCustomEffect';
 
 const SearchButton = styled(Button)({
     width:"50%",
