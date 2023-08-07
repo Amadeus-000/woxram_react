@@ -1,7 +1,6 @@
 import React from "react";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
-import Box from '@mui/material/Box';
 
 const CustomPagination = ({ numberOfWorks }) => {
   const location = useLocation();

@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MenuAppBar from '../components/MenuAppBar';
+import MenuAppBar from '../components/common/MenuAppBar';
 
 import React, { useState } from 'react';
 import { Button, TextField, Container, Typography,Grid } from '@mui/material';

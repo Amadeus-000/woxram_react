@@ -1,4 +1,4 @@
-import GlobalConstant from "./GlobalConstant";
+import GlobalConstant from "../GlobalConstant";
 
 function checkVersion() {
     try{

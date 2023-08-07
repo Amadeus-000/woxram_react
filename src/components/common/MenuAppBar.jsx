@@ -9,13 +9,13 @@ import Drawer from '@mui/material/Drawer';
 import {List,ListItem,ListItemButton,ListItemText} from '@mui/material';
 import styled from "@emotion/styled";
 
-import title from "../assets/images/woxram_logo_regular_360x60_white.png"
-import logoimg from "../assets/images/woxram_icon.png"
-import GlobalConstant from "./GlobalConstant";
+import title from "../../assets/images/woxram_logo_regular_360x60_white.png"
+import logoimg from "../../assets/images/woxram_icon.png"
+import GlobalConstant from "../GlobalConstant";
 import axios from 'axios';
 
-import AccountMenu from './AccountComponents/AccountMenu';
-import TwitterLogin from './AccountComponents/TwitterLogin';
+import AccountMenu from '../account/AccountMenu';
+import TwitterLogin from '../account/TwitterLogin';
 import { useSelector } from 'react-redux';
 
 

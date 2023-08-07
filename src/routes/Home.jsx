@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Grid, Container } from '@mui/material';
 
-import MenuAppBar from '../components/MenuAppBar';
-import TopImg from '../components/TopImg';
-import SearchMenu from '../components/SearchMenu';
-import WorkCard from '../components/WorkCard_v2';
-import Spinner from '../components/Spinner';
-import CustomPagination from '../components/CustomPagenation';
+import MenuAppBar from '../components/common/MenuAppBar';
+import TopImg from '../components/common/TopImg';
+import SearchMenu from '../components/search/SearchMenu';
+import WorkCard from '../components/list/WorkCard';
+import Spinner from '../components/parts/Spinner';
+import CustomPagination from '../components/list/CustomPagenation';
 
-import ScrollObserver from '../components/common/ScrollObserver';
+import ScrollObserver from '../components/utils/ScrollObserver';
 
 
 const theme = createTheme({

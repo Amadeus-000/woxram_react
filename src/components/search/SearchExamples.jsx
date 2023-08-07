@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import styled from "@emotion/styled";
 import axios from 'axios';
 
-import GlobalConstant from './GlobalConstant';
-import {StyledLink,NoUnderLineLink} from './MyStyledComponents';
+import GlobalConstant from '../GlobalConstant';
+import {StyledLink,NoUnderLineLink} from '../parts/MyStyledComponents';
 
 import Button from '@mui/material/Button';
 

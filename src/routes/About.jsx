@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container } from '@mui/material';
-import MenuAppBar from '../components/MenuAppBar';
+import MenuAppBar from '../components/common/MenuAppBar';
 
 const theme = createTheme({
     palette: {

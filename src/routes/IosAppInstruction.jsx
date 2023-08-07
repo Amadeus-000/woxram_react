@@ -3,7 +3,7 @@ import { Container, Grid } from '@mui/material';
 import styled from "@emotion/styled";
 
 
-import MenuAppBar from '../components/MenuAppBar';
+import MenuAppBar from '../components/common/MenuAppBar';
 
 const theme = createTheme({
     palette: {

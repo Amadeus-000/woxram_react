@@ -1,11 +1,11 @@
 import { Grid } from '@mui/material';
-import topImg from "../assets/images/woxram_logo_regular_400x120.png"
+import topImg from "../../assets/images/woxram_logo_regular_400x120.png"
 import styled from "@emotion/styled";
 
-import SearchExamples from './SearchExamples';
+import SearchExamples from '../search/SearchExamples';
 
-import GlobalConstant from './GlobalConstant';
-import {StyledLink} from './MyStyledComponents';
+import GlobalConstant from '../GlobalConstant';
+import {StyledLink} from '../parts/MyStyledComponents';
 
 const TopImg = () => {
     const HomeImg = styled.img`

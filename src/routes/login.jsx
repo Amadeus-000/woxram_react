@@ -1,6 +1,6 @@
-import SearchAutoComplete from "../components/SearchAutocomplete";
-import Spinner from "../components/Spinner";
-import WorkCard from "../components/WorkCard";
+import SearchAutoComplete from "../components/search/SearchAutocomplete";
+import Spinner from "../components/parts/Spinner";
+import WorkCard from "../components/old/WorkCard";
 
 const Login = () => {
     const keywords=[
