@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged} from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {NoUnderLineLinkBlack} from '../parts/MyStyledComponents';
 
 const AccountIcon=(props)=>{
     const iconImageURL=useSelector(state => state.account.iconImageURL);
@@ -40,7 +41,7 @@ const AccountIcon=(props)=>{
                 }}
                 autoFocus = {false}
             >
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}><NoUnderLineLinkBlack href="/account/">Account</NoUnderLineLinkBlack></MenuItem>
                 <MenuItem onClick={handleClose}>新しい機能を制作中！</MenuItem>
             </Menu>
         </div>
@@ -55,6 +56,7 @@ const AccountMenu=(props)=>{
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, user => {
+            console.log("onAuthStateChanged");
             if (user) {
                 dispatch({ type: "SET_LOGGED_IN" });
                 dispatch({ type: "SET_UID", payload: user.uid });

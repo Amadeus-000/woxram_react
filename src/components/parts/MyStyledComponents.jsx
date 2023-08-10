@@ -34,3 +34,19 @@ export const NoUnderLineLink = styled.a`
     color: #004396;
   }
 `;
+
+export const NoUnderLineLinkBlack = styled.a`
+  text-decoration: none;
+
+  &:visited {
+    color: #000000;
+  }
+
+  &:hover {
+    color: #000000;
+  }
+
+  &:active {
+    color: #000000;
+  }
+`;

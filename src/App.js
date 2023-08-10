@@ -6,10 +6,9 @@ import Home from './routes/Home';
 import About from './routes/About';
 import IosAppInstruction from './routes/IosAppInstruction';
 import AndroidAppInstruction from './routes/AndroidAppInstruction';
-import MyAccount from './routes/MyAccount';
+import Account from './routes/Account';
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 
 import { Provider } from "react-redux"
 import store from './store';
@@ -42,7 +41,7 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/ios-app-instruction' element={<IosAppInstruction />} />
         <Route path='/android-app-instruction' element={<AndroidAppInstruction />} />
-        <Route path='/account' element={<MyAccount />} />
+        <Route path='/account' element={<Account />} />
       </Routes>
     </BrowserRouter>
     </Provider>

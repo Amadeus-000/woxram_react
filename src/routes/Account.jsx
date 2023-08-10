@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 
+import Uploadform from "../components/account/Uploadform";
+
 const theme = createTheme({
     palette: {
       primary: {
@@ -27,9 +29,9 @@ const theme = createTheme({
       },
 });
 
-const MyAccount = () => {
-    const isLoggedIn=useSelector(state => state.loggedIn);
-    const isLoading=useSelector(state => state.isLoading);
+const Account = () => {
+    const isLoggedIn=useSelector(state => state.account.loggedIn);
+    const isLoading=useSelector(state => state.account.isLoading);
     console.log("isLoggedIn",isLoggedIn);
     const navigate = useNavigate();
     useEffect(() => {
@@ -48,10 +50,11 @@ const MyAccount = () => {
                         <Grid container >
                             <p>account</p>
                         </Grid>
+                        <Uploadform />
                     </Container>
             </ThemeProvider>
         </>
     );
 };
 
-export default MyAccount;
+export default Account;
