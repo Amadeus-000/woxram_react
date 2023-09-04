@@ -8,7 +8,7 @@ import './SearchAutocomplete.css';
 let suggestions = [
   'Apple','application','apply', 'Banana', 'Cherry', 'Date', 'Fig', 'Grape', 'Lemon', 'Mango', 'Orange', 'Pineapple', 'Strawberry'
 ];
-axios.get('https://woxram.com/django/api/getnamelist/')
+axios.get('https://woxram-api.com/search/getnamelist/')
   .then(function (response) {
       suggestions=response.data;
 })
